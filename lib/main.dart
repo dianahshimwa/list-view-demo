@@ -30,6 +30,7 @@ class _ExpenseListScreenState extends State<ExpenseListScreen> {
 
   bool _reverse = false;  // Attribute 1: reverse
   double _padding = 8;    // Attribute 2: padding
+  bool _fixedHeight = false; // Attribute 3: itemExtent
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +42,11 @@ class _ExpenseListScreenState extends State<ExpenseListScreen> {
             title: const Text('reverse'),
             value: _reverse,
             onChanged: (v) => setState(() => _reverse = v),
+          ),
+          SwitchListTile(
+            title: const Text('itemExtent (fixed 56px rows)'),
+            value: _fixedHeight,
+            onChanged: (v) => setState(() => _fixedHeight = v),
           ),
           ListTile(
             title: Text('padding: ${_padding.round()}px'),
@@ -56,8 +62,11 @@ class _ExpenseListScreenState extends State<ExpenseListScreen> {
             child: ListView.builder(
               reverse: _reverse,
               padding: EdgeInsets.all(_padding),
+              itemExtent: _fixedHeight ? 56 : null,
               itemCount: _expenses.length,
               itemBuilder: (context, index) => ListTile(
+                tileColor: Theme.of(context).colorScheme.surfaceContainerHighest,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                 leading: CircleAvatar(child: Text('${index + 1}')),
                 title: Text(_expenses[index]),
               ),
