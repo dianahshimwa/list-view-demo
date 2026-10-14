@@ -28,7 +28,8 @@ class _ExpenseListScreenState extends State<ExpenseListScreen> {
     (i) => 'Expense #${i + 1}  ·  RWF ${(i + 1) * 1500}',
   );
 
-  bool _reverse = false; // Attribute 1: reverse
+  bool _reverse = false;  // Attribute 1: reverse
+  double _padding = 8;    // Attribute 2: padding
 
   @override
   Widget build(BuildContext context) {
@@ -41,10 +42,20 @@ class _ExpenseListScreenState extends State<ExpenseListScreen> {
             value: _reverse,
             onChanged: (v) => setState(() => _reverse = v),
           ),
+          ListTile(
+            title: Text('padding: ${_padding.round()}px'),
+            subtitle: Slider(
+              min: 0,
+              max: 32,
+              value: _padding,
+              onChanged: (v) => setState(() => _padding = v),
+            ),
+          ),
           const Divider(),
           Expanded(
             child: ListView.builder(
               reverse: _reverse,
+              padding: EdgeInsets.all(_padding),
               itemCount: _expenses.length,
               itemBuilder: (context, index) => ListTile(
                 leading: CircleAvatar(child: Text('${index + 1}')),
