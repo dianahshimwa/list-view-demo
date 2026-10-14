@@ -28,3 +28,5 @@ Tap the tune icon in the app bar to open the list settings. The switches and sli
 ## Screenshot
 
 ![Final UI](screenshot.png)
+
+Helped by Claude to some part of this README file
